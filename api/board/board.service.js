@@ -14,7 +14,7 @@ async function query(filterBy) {
    try {
       const criteria = {}
       console.log('before get collection')
-      const collection = await dbService.getCollection('board')
+      const collection = await dbService.getCollection('boards')
       console.log('before after collection')
 
       const boards = await collection.find(criteria).toArray()
@@ -42,7 +42,7 @@ async function getById(boardId) {
 async function remove(boardId) {
    try {
       if (boardId === '60fe8d8a9dc7b4d56dc56006') return;
-      const collection = await dbService.getCollection('board')
+      const collection = await dbService.getCollection('boards')
       return await collection.deleteOne({ _id: ObjectId(boardId) })
    } catch (err) {
       console.log(`Beckend - ERROR: cannot remove board ${boardId}`)
@@ -53,7 +53,7 @@ async function remove(boardId) {
 async function update(board) {
    try {
       board._id = ObjectId(board._id)
-      const collection = await dbService.getCollection('board')
+      const collection = await dbService.getCollection('boards')
       await collection.updateOne({ _id: board._id }, { $set: { ...board } })
       return board
    } catch (err) {
@@ -64,7 +64,7 @@ async function update(board) {
 
 async function add(board) {
    try {
-      const collection = await dbService.getCollection('board')
+      const collection = await dbService.getCollection('boards')
       await collection.insertOne(board)
       return board
    } catch (err) {
@@ -76,7 +76,7 @@ async function add(board) {
 async function addActivity(boardId, activity) {
    try {
       boardId = ObjectId(boardId)
-      const collection = await dbService.getCollection('board')
+      const collection = await dbService.getCollection('boards')
       await collection.updateOne({ _id: boardId }, { $push: { activities: activity } })
       // await collection.updateOne({ _id: boardId }, { $push: { activities: { $each: [ activity ], $position: 1 } } })
       return activity
