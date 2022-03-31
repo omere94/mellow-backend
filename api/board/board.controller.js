@@ -4,11 +4,8 @@ const socketService = require('../../services/socket.service')
 const logger = require('../../services/logger.service')
 
 async function getBoard(req, res) {
-   console.log("hi");
    try {
-      console.log('req.params:', req.params);
       const board = await boardService.getById(req.params.id)
-      console.log('board', board);
       res.send(board)
    } catch (err) {
       logger.error('Failed to get board', err)
@@ -25,7 +22,6 @@ async function getBoards(req, res) {
       // }
 
       const boards = await boardService.query()
-      console.log(boards);
       res.json(boards)
    } catch (err) {
       logger.error('Failed to get boards', err)

@@ -13,9 +13,7 @@ module.exports = {
 async function query(filterBy) {
    try {
       const criteria = {}
-      console.log('before get collection')
       const collection = await dbService.getCollection('boards')
-      console.log('before after collection')
 
       const boards = await collection.find(criteria).toArray()
       return boards;
@@ -29,9 +27,9 @@ async function getById(boardId) {
    try {
       boardId = ObjectId(boardId)
       const collection = await dbService.getCollection('boards')
-      console.log('collection', collection);
+      // console.log('collection', collection);
       const board = await collection.findOne({ "_id": boardId })
-      console.log('board from getById', board);
+      // console.log('board from getById', board);
       return board
    } catch (err) {
       console.log(`Beckend - ERROR: cannot get board ${boardId}`)
