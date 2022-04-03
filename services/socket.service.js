@@ -7,7 +7,7 @@ function connectSockets(http, session) {
     gIo = require('socket.io')(http, {
         cors: {
             origin: ['http://127.0.0.1:8080',
-                'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
+                'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000', 'https://obscure-bayou-99068.herokuapp.com'],
         }
     })
     gIo.on('connection', socket => {
